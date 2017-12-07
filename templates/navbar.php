@@ -19,7 +19,7 @@
             </li> -->
         </ul>
         <?php if(!isset($_SESSION['user_id'])): ?>
-        <ul class="navbar-nav navbar-right">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
             <li class="nav-item">
                 <a class="nav-link" href="login.php">Login</a>
             </li>
