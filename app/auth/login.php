@@ -18,15 +18,13 @@
 
     // echo json_encode($statement->fetch(PDO::FETCH_ASSOC)['passw']);
     // die;
-
-    $pass = $statement->fetch(PDO::FETCH_ASSOC)['passw'];
-
     if(isset($statement->fetch(PDO::FETCH_ASSOC)['passw'])){
+        $pass = $statement->fetch(PDO::FETCH_ASSOC)['passw'];
         if (password_verify($_POST['passw'], $pass)) {
             # code...
         }
         echo json_encode($statement->fetch(PDO::FETCH_ASSOC));
         die;
-    }
-
-    echo json_encode(['error' => true, 'errorInfo'=>'User not found']);
+ }else{
+        echo json_encode(['error' => true, 'errorInfo'=>'User not found']);
+ }
