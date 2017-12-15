@@ -1,23 +1,58 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  </head>
-  <body>
-    <?php require(__DIR__.'/templates/navbar.php'); ?>
-    <main class="container">
-        
-    </main>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  </body>
-</html>
+<?php
+declare(strict_types=1);
+require(__DIR__.'/views/header.php');
+if(isset($_SESSION['user_id'])) redirect('.');
+?>
+<main class="container">
+    <div class="row">
+        <div class="col-12 bg-warning loginError">
+            <span>Some generic error about a user</span>
+        </div>
+    </div>
+    <div class="row mt-auto">
+        <div class="col-md-12 col-lg-10">
+            <h4>Log in</h4>
+            <form>
+                <div class="form-group">
+                <label for="loginEmail">Email address</label>
+                <input type="email" class="form-control" id="loginEmail" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                <label for="loginPassw">Password</label>
+                <input type="password" class="form-control" id="loginPassw" placeholder="Password" required>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input">
+                    Remember ME!
+                </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-loginUser">Login</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-auto">
+        <div class="col-md-12 col-lg-10">
+        <h4>Or register</h4>
+        <form name="regUserForm" onsubmit="return false;">
+        <div class="form-group">
+          <label for="regUsername">Username</label>
+          <input name="username" type="text" class="form-control" id="regUsername" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email address</label>
+          <input name="email" type="email" class="form-control" id="regEmail" aria-describedby="regEmailHelp" placeholder="Enter email" required>
+          <small id="regEmailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="regPassw">Password</label>
+          <input name="passw" type="password" class="form-control" id="regPassw" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-regUser">Register</button>
+      </form>
+        </div>
+    </div>
+</main>
+<script src="assets/scripts/login.js"></script>
+<?php require(__DIR__.'/views/footer.php'); ?>

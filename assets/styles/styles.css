@@ -1,0 +1,18 @@
+.loginError{
+    height: 0px;
+    min-height: 0px;
+    overflow: hidden;
+    -webkit-transition: height .5s ease-in-out;
+    -moz-transition: height .5s ease-in-out;
+    transition: height .5s ease-in-out;
+    font-size: 1.5em;
+    display: flex;
+}
+
+.loginError span{
+    align-self: center;
+}
+
+.loginError.open{
+    height: 100px;
+}

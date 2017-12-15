@@ -1,0 +1,2 @@
+CREATE TABLE users(id integer primary key, nickname text unique, email text unique, passw text, bio text, avatar_url text);
+INSERT INTO users(nickname, email, passw) VALUES ('admin', 'admin@admin.admin', '$2y$10$X.HfMvQ8Q5/IMbtgZ93O/erR5YglXc2Vg9YRZSWIyMU.cGeal.qwi');
