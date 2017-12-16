@@ -29,6 +29,6 @@
         }
         echo json_encode(['error'=>true, 'errorInfo'=>"Password was not set in database"]);
         die;
-    }
-
-    echo json_encode(['error' => true, 'errorInfo'=>'User not found']);
+ }else{
+        echo json_encode(['error' => true, 'errorInfo'=>'User not found']);
+ }
