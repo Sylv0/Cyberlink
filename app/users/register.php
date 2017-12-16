@@ -14,6 +14,9 @@ $statement = $pdo->prepare("INSERT INTO users(nickname, email, passw) VALUES(:us
 $statement->bindParam(':username', $user, PDO::PARAM_STR);
 $statement->bindParam(':email', $email, PDO::PARAM_STR);
 $statement->bindParam(':passw', $passw, PDO::PARAM_STR);
+// $statement->bindParam(':username', $_POST['username'], PDO::PARAM_STR);
+// $statement->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
+// $statement->bindParam(':passw', $_POST['passw'], PDO::PARAM_STR);
 
 if(!$statement->execute()){
     echo json_encode(["error"=>true, "errorInfo"=>$pdo->errorInfo()]);
@@ -22,5 +25,5 @@ if(!$statement->execute()){
     die;
 }
 
-echo json_encode(["error"=>false]);
+echo json_encode(["error"=>false, 'data'=>$_POST]);
 //redirect('../../login.php');

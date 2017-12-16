@@ -19,13 +19,15 @@
     // echo json_encode($statement->fetch(PDO::FETCH_ASSOC)['passw']);
     // die;
 
-    $pass = $statement->fetch(PDO::FETCH_ASSOC)['passw'];
+    $data = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if(isset($statement->fetch(PDO::FETCH_ASSOC)['passw'])){
-        if (password_verify($_POST['passw'], $pass)) {
-            # code...
+    if(isset($data['passw'])){
+        if (password_verify($_POST['passw'], $data['passw'])) {
+            echo "Logged in I guess";
+            $_SESSION['userid'] = $data['id'];
+            die;
         }
-        echo json_encode($statement->fetch(PDO::FETCH_ASSOC));
+        echo json_encode(['error'=>true, 'errorInfo'=>"Password was not set in database"]);
         die;
     }
 
