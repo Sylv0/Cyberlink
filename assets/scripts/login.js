@@ -17,7 +17,7 @@ window.onload = () => {
             method: 'POST',
             body: formData,
           })
-        
+
           fetch(request)
           .then(function(data) {
             return data.json();
@@ -37,11 +37,12 @@ window.onload = () => {
         let formData = new FormData();
         formData.append('email', document.querySelector('#loginEmail').value);
         formData.append('passw', document.querySelector('#loginPassw').value);
+        formData.append('session_id', document.querySelector('#loginSessionID').value);
         var request = new Request('app/auth/login.php', {
             method: 'POST',
             body: formData,
           })
-        
+
           fetch(request)
           .then(function(data) {
             return data.json();

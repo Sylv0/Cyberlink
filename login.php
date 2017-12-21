@@ -11,7 +11,7 @@ if(isset($_SESSION['user_id'])) redirect('.');
     </div>
     <div class="row mt-auto">
         <div class="col-md-12 col-lg-10">
-            <h4>Log in</h4>
+            <h4>Log in (session: <?php echo session_id(); ?>)</h4>
             <form>
                 <div class="form-group">
                 <label for="loginEmail">Email address</label>
@@ -27,6 +27,7 @@ if(isset($_SESSION['user_id'])) redirect('.');
                     Remember ME!
                 </label>
                 </div>
+                <input type="hidden" id="loginSessionID" value="<?php echo session_id(); ?>">
                 <button type="submit" class="btn btn-primary btn-loginUser">Login</button>
             </form>
         </div>

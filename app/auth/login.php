@@ -1,11 +1,21 @@
 <?php
     declare(strict_types=1);
+
+    if(isset($_POST['session_id'])){
+          session_id($_POST['session_id']);
+   }
+
+    require '../autoload.php';
+
+    if(isset($_SESSION['userid'])){
+          echo json_encode(['error'=>true, 'errorInfo'=>'A user is already logged in.']);
+          die;
+   }
+
     if(!isset($_POST['email']) || !isset($_POST['passw'])){
         echo json_encode(['error'=>true, 'errorInfo'=>'No data']);
         die;
     }
-
-    require '../autoload.php';
 
     //echo json_encode(['email'=>$_POST['email'], 'passw'=>$_POST['passw']]);
 
