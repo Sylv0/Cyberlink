@@ -17,6 +17,7 @@ require(__DIR__.'/views/header.php');
             <hr>
             <div>
                 <h3>Title</h3>
+                <?php echo print_r($_SESSION); ?>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptatum temporibus adipisci alias expedita, itaque vitae aspernatur? A hic voluptatum doloremque, temporibus impedit ducimus, amet labore quo libero perspiciatis repudiandae?</p>
             </div>
             <hr>

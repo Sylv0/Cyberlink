@@ -51,6 +51,8 @@ window.onload = () => {
                 if(data['error']){
                     document.querySelector(".loginError").classList.add('open');
                     document.querySelector(".loginError span").innerHTML = data['errorInfo'];
+                }else{
+                    //window.location = ".";
                 }
             })
           .catch(res=>console.log("res"));
