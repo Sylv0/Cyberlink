@@ -8,13 +8,20 @@
                 <a class="nav-link" href=".">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo isset($_SESSION['userid']) ? "makepost.php" : "login.php"; ?>">Make Post</a>
+                <a class="nav-link" href="<?php echo $loggedIn ? "makepost.php" : "login.php"; ?>">Make Post</a>
             </li>
         </ul>
-        <?php if(!isset($_SESSION['userid'])): ?>
+        <?php if(!$loggedIn): ?>
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
             <li class="nav-item">
                 <a class="nav-link" href="login.php">Login</a>
+            </li>
+        </ul>
+        <?php endif; ?>
+        <?php if($loggedIn): ?>
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="app/auth/logout.php">Log out</a>
             </li>
         </ul>
         <?php endif; ?>

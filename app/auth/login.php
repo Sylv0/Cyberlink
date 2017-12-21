@@ -34,7 +34,7 @@
     if(isset($data['passw'])){
         if (password_verify($_POST['passw'], $data['passw'])) {
             $_SESSION['userid'] = $data['id'];
-            echo "Logged in I guess " . $_SESSION['userid'];
+            echo json_encode("Logged in I guess " . $_SESSION['userid']);
             die;
         }
         echo json_encode(['error'=>true, 'errorInfo'=>"Password was not set in database"]);
