@@ -3,7 +3,7 @@ declare(strict_types=1);
 require(__DIR__.'/views/header.php');
 ?>
 <main class="container">
-<div class="row">
+    <div class="row">
         <div class="col-xs-12 col-sm-10 col-lg-11 post-container">
             <div>
                 <h3>Title</h3>
