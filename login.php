@@ -14,15 +14,15 @@ if(isset($_SESSION['user_id'])) redirect('.');
             <h4>Log in</h4>
             <form>
                 <div class="form-group">
-                <label for="loginEmail">Email address</label>
-                <input type="email" class="form-control" id="loginEmail" placeholder="Enter email" required>
+                    <label for="loginEmail">Email address</label>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter email" required>
                 </div>
                 <div class="form-group">
-                <label for="loginPassw">Password</label>
-                <input type="password" class="form-control" id="loginPassw" placeholder="Password" required>
+                    <label for="loginPassw">Password</label>
+                    <input type="password" class="form-control" id="loginPassw" placeholder="Password" required>
                 </div>
                 <div class="form-check">
-                <label class="form-check-label">
+                    <label class="form-check-label">
                     <input type="checkbox" class="form-check-input">
                     Remember ME!
                 </label>
@@ -35,23 +35,23 @@ if(isset($_SESSION['user_id'])) redirect('.');
     <hr>
     <div class="row mt-auto">
         <div class="col-md-12 col-lg-10">
-        <h4>Or register</h4>
-        <form name="regUserForm" onsubmit="return false;">
-        <div class="form-group">
-          <label for="regUsername">Username</label>
-          <input name="username" type="text" class="form-control" id="regUsername" placeholder="Enter username" required>
-        </div>
-        <div class="form-group">
-          <label for="regEmail">Email address</label>
-          <input name="email" type="email" class="form-control" id="regEmail" aria-describedby="regEmailHelp" placeholder="Enter email" required>
-          <small id="regEmailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-          <label for="regPassw">Password</label>
-          <input name="passw" type="password" class="form-control" id="regPassw" placeholder="Password" required>
-        </div>
-        <button type="submit" class="btn btn-primary btn-regUser">Register</button>
-      </form>
+            <h4>Or register</h4>
+            <form name="regUserForm" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input name="username" type="text" class="form-control" id="regUsername" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email address</label>
+                    <input name="email" type="email" class="form-control" id="regEmail" aria-describedby="regEmailHelp" placeholder="Enter email" required>
+                    <small id="regEmailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="regPassw">Password</label>
+                    <input name="passw" type="password" class="form-control" id="regPassw" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-regUser">Register</button>
+            </form>
         </div>
     </div>
 </main>
