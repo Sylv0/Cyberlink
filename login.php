@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 require(__DIR__.'/views/header.php');
-if(isset($_SESSION['user_id'])) redirect('.');
+if(isset($_SESSION['userid'])) redirect('.');
 ?>
 <main class="container">
     <div class="row">
@@ -12,14 +12,14 @@ if(isset($_SESSION['user_id'])) redirect('.');
     <div class="row mt-auto">
         <div class="col-md-12 col-lg-10">
             <h4>Log in</h4>
-            <form>
+            <form name="loginUserForm">
                 <div class="form-group">
                     <label for="loginEmail">Email address</label>
-                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter email" required>
+                    <input name="email" type="email" class="form-control" placeholder="Enter email" required>
                 </div>
                 <div class="form-group">
                     <label for="loginPassw">Password</label>
-                    <input type="password" class="form-control" id="loginPassw" placeholder="Password" required>
+                    <input name="passw" type="password" class="form-control" placeholder="Password" required>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
@@ -27,7 +27,7 @@ if(isset($_SESSION['user_id'])) redirect('.');
                     Remember ME!
                 </label>
                 </div>
-                <input type="hidden" id="loginSessionID" value="<?php echo session_id(); ?>">
+                <input name="sessid" type="hidden" value="<?php echo session_id(); ?>">
                 <button type="submit" class="btn btn-primary btn-loginUser">Login</button>
             </form>
         </div>
@@ -39,16 +39,16 @@ if(isset($_SESSION['user_id'])) redirect('.');
             <form name="regUserForm" onsubmit="return false;">
                 <div class="form-group">
                     <label for="regUsername">Username</label>
-                    <input name="username" type="text" class="form-control" id="regUsername" placeholder="Enter username" required>
+                    <input name="username" type="text" class="form-control" placeholder="Enter username" required>
                 </div>
                 <div class="form-group">
                     <label for="regEmail">Email address</label>
-                    <input name="email" type="email" class="form-control" id="regEmail" aria-describedby="regEmailHelp" placeholder="Enter email" required>
-                    <small id="regEmailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <input name="email" type="email" class="form-control" aria-describedby="regEmailHelp" placeholder="Enter email" required>
+                    <small id="regEmailHelp" class="form-text text-muted">We'll never share your email with anyone else without premission.</small>
                 </div>
                 <div class="form-group">
                     <label for="regPassw">Password</label>
-                    <input name="passw" type="password" class="form-control" id="regPassw" placeholder="Password" required>
+                    <input name="passw" type="password" class="form-control" placeholder="Password" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-regUser">Register</button>
             </form>
