@@ -2,46 +2,25 @@
 declare(strict_types=1);
 require(__DIR__.'/views/header.php');
 ?>
+
 <main class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-sm-10 col-lg-10 post-container">
-            <div class="card mt-4">
-                <div class="card-header">
-                    Title
-                </div>
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis numquam iusto quasi praesentium odit. Error cumque sunt eligendi, aspernatur neque asperiores, rem, laudantium tempora minus nulla maiores. Error, modi delectus.</p>
-                        <footer class="blockquote-footer">Author <cite title="Source Title">Date</cite> (*edit)</footer>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-10 col-lg-10 post-container">
-            <div class="card mt-4">
-                <div class="card-header">
-                    Title
-                </div>
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis numquam iusto quasi praesentium odit. Error cumque sunt eligendi, aspernatur neque asperiores, rem, laudantium tempora minus nulla maiores. Error, modi delectus.</p>
-                        <footer class="blockquote-footer">Author <cite title="Source Title">Date</cite> (*edit)</footer>
-                    </blockquote>
-                </div>
-            </div>
-        </div><div class="col-xs-12 col-sm-10 col-lg-10 post-container">
-            <div class="card mt-4">
-                <div class="card-header">
-                    Title
-                </div>
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis numquam iusto quasi praesentium odit. Error cumque sunt eligendi, aspernatur neque asperiores, rem, laudantium tempora minus nulla maiores. Error, modi delectus.</p>
-                        <footer class="blockquote-footer">Author <cite title="Source Title">Date</cite> (*edit)</footer>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
+    <?php if(isset($_SESSION['userid'])): ?>
+        <form name="postForm">
+          <fieldset class="form-group">
+            <label for="formGroupExampleInput">Title</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Your title" name="postTitle">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="formGroupExampleInput2">Text</label>
+            <textarea rows="4" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Your text" name="postText"></textarea>
+          </fieldset>
+          <input type="hidden" name="postAuthor" value="<?php echo $_SESSION['userid']; ?>">
+          <input type="submit" name="postSubmit" value="Post" class="btn btn-primary">
+        </form>
+    <?php endif; ?>
+    <div class="row posts">
+
     </div>
+    <script src="assets/scripts/posts.js" charset="utf-8"></script>
 </main>
 <?php require(__DIR__.'/views/footer.php'); ?>
