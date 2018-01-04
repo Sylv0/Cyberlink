@@ -21,4 +21,7 @@
         }
         echo json_encode($getPosts->fetch(PDO::FETCH_ASSOC));
         die;
+    }else if(isset($_POST['getVotes']) && $_POST['getVotes']){
+        $getVotes = $pdo->prepare('SELECT * from postVotes');
+        echo json_encode($getVotes->fetch(PDO::FETCH_ASSOC));
     }
