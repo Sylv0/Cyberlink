@@ -7,8 +7,12 @@ require(__DIR__.'/views/header.php');
     <?php if(isset($_SESSION['userid'])): ?>
         <form name="postForm" onsubmit="return false;" class="col-lg-10 col-md-12">
           <fieldset class="form-group">
-            <label for="formGroupExampleInput">Title</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Your title" name="postTitle" required>
+            <label for="formGroupTitle">Title</label>
+            <input type="text" class="form-control" id="formGroupTitle" placeholder="Your title" name="postTitle" required>
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="formGroupLink">Link</label>
+            <input type="text" class="form-control" id="formGroupLink" placeholder="Your link" name="postLink">
           </fieldset>
           <fieldset class="form-group">
             <label for="formGroupExampleInput2">Text</label>
