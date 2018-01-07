@@ -10,11 +10,12 @@ if (!isset($_POST['title']) || !isset($_POST['text']) || !isset($_POST['author']
     die;
 }
 
-$statement = $pdo->prepare('INSERT INTO posts(authorID, title, postText, postTime, updateTime) VALUES (:authid, :title, :inText, :date, :date)');
+$statement = $pdo->prepare('INSERT INTO posts(authorID, title, postText, image_url, postTime, updateTime) VALUES (:authid, :title, :inText, :imageURL, :date, :date)');
 // die(var_dump($pdo->errorInfo()));
 $statement->bindParam(':authid', $_POST['author']);
 $statement->bindParam(':title', $_POST['title']);
 $statement->bindParam(':inText', $_POST['text']);
+$statement->bindParam(':imageURL', $_POST['imageURL']);
 $date = Date('Y-m-d H:i:s');
 $statement->bindParam(':date', $date);
 
