@@ -4,11 +4,10 @@
     if(!isset($_SESSION['userid'])) redirect('.');
 
     $statement = $pdo->prepare("SELECT nickname, email, bio, avatar_url from users WHERE id=:id");
-    $id = $_SESSION['userid'];
-    $statement->bindParam(":id", $id, PDO::PARAM_INT);
+    $statement->bindParam(":id", $_SESSION['userid'], PDO::PARAM_INT);
 
     if (!$statement->execute()) {
-        redirect('.');
+        redirect('./login.php');
     }
 
     $data = $statement->fetch(PDO::FETCH_ASSOC);
