@@ -29,9 +29,8 @@ const submitPost = () => {
         return data.json();
     })
     .then(data => {
-        //console.log(data);
         if (data['error']) {
-            console.log(data['errorInfo']);
+            console.log("ERROR: " + data['errorInfo']);
         } else if(data['submited']){
             getLatestPost();
             postForm.reset();
@@ -41,24 +40,30 @@ const submitPost = () => {
 }
 
 const createPost = (post) => {
+    //let votes = getVotes(post['postID']);
+    let score = 0;
     let div = document.createElement('div');
     div.className = "col-md-12 col-lg-10 post-container";
     let postTemp =`
     <div class="card mt-4">
-        <a href="${post['imageURL']}" class="card-header" onclick="return false;">
+        <a target="_blank" href="${post['image_url']}" class="card-header">
             ${post['title']}
         </a>
         <div class="card-body row">
             <blockquote class="blockquote mb-0 col-10">
-            <p>${post['postText']}</p>
-            <footer class="blockquote-footer"><a href="${post['author']}">${post['author']}</a> <cite title="Source Title">${post['postTime']}</cite> (${post['updateTime']})</footer>
+                <p>${post['postText']}</p>
+                <footer class="blockquote-footer"><a href="${post['author']}">${post['author']}</a> <cite title="Source Title">${post['postTime']}</cite> (${post['updateTime']})</footer>
             </blockquote>
-            <blockquote class="col-2"><a href="#" class="btn btn-sm btn-primary voteUp">&uArr;</a> 0 <a href="#" class="btn btn-sm btn-primary voteUp">&dArr;</a></blockquote>
+            <blockquote class="col-2">
+                <a href="#" class="btn btn-sm btn-primary vote voteUp">&uArr;</a>
+                 0 
+                <a href="#" class="btn btn-sm btn-primary vote voteDown">&dArr;</a>
+            </blockquote>
         </div>
     </div>
     `;
     div.innerHTML = postTemp;
-    if(post['imageURL'] == undefined){
+    if(post['image_url'] == undefined || post['image_url'] == ""){
         div.querySelector('a.card-header').setAttribute('href', '#');
         div.querySelector('a.card-header').setAttribute('onclick', 'return false;');
         div.querySelector('a.card-header').innerHTML += "(no link)";
@@ -79,9 +84,8 @@ const getPosts = () => {
         return data.json();
     })
     .then(data => {
-        //console.log(data);
         if (data['error']) {
-            console.log(data['errorInfo']);
+            console.log('ERROR: ' + data['errorInfo']);
         } else {
             data.forEach(post => {
                 postDiv.insertBefore(createPost(post), postDiv.children[0]);
@@ -104,9 +108,8 @@ const getLatestPost = () => {
         return data.json();
     })
     .then(data => {
-        //console.log(data);
         if (data['error']) {
-            console.log('ERROR');
+            console.log('ERROR: ' + data['errorInfo']);
         } else {
             postDiv.insertBefore(createPost(data), postDiv.children[0]);
         }
@@ -114,9 +117,10 @@ const getLatestPost = () => {
     .catch(res => console.log(res));
 }
 
-const getVotes = () => {
+const getVotes = (postID) => {
     let formData = new FormData();
     formData.append('getVotes', true);
+    formData.append('postID', postID);
     var request = new Request('app/posts/get.php', {
         method: 'POST',
         body: formData
@@ -127,7 +131,7 @@ const getVotes = () => {
         return data.json();
     })
     .then(data => {
-        console.log(data);
+        //console.log(data);
     })
     .catch(res => console.log(res));
 }
