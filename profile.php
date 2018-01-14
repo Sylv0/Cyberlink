@@ -1,20 +1,57 @@
-<?php require 'views/header.php'; ?>
+<style>
+    .reviewer{
+        height: 150px;
+        width: auto;
+    }
+</style>
 
-<?php 
+<?php
+    require 'views/header.php';
     if(!isset($_SESSION['userid'])) redirect('.');
 
-    $statement = $pdo->prepare("SELECT nickname, email, bio, avatar_url from users WHERE id=:id");
-    $statement->bindParam(":id", $_SESSION['userid'], PDO::PARAM_INT);
+    if(isset($_GET['targetUser'])) {
+        $target = $_GET['targetUser'];
+    } else {
+        $target = $_SESSION['userid'];
+    }
+
+    $statement = $pdo->prepare("SELECT id, nickname, email, bio, avatar_url, regDate from users WHERE id=:id");
+    $statement->bindParam(":id", $target, PDO::PARAM_INT);
 
     if (!$statement->execute()) {
-        redirect('./login.php');
+        echo $pdo->errorInfo();
+        die;
+        //redirect('./login.php');
     }
 
     $data = $statement->fetch(PDO::FETCH_ASSOC);
+    if($data === false){
+        echo "No user found with that idea.";
+        die;
+    }
 ?>
-
 <div class="container">
-    <form name="regUserForm" onsubmit="return false;">
+    <div class="reviews">
+    <div class="row blockquote review-item">
+        <div class="col-md-3 text-center">
+        <img class="rounded-circle reviewer" src="<?php echo $data['avatar_url']; ?>">
+
+        </div>
+        <div class="col-md-9">
+        <h4><?php echo $data['nickname'] ?></h4>
+        <p class="review-text"><?php if(strlen($data['bio']) == 0){ echo "No bio."; } else { echo $data['bio']; } ?></p>
+        <small class="review-date"><?php echo $data['email']; ?></small>
+        <small class="review-date"><br>Member since: <?php echo $data['regDate']; ?></small>
+        </div>
+    </div>
+    </div>
+</div>
+
+<?php
+    if($_SESSION['userid'] == $data['id']):
+?>
+<div class="container">
+    <form name="regUserForm" action="app/users/update.php" method="post">
         <div class="form-group">
             <label for="regEmail">Email address</label>
             <input name="email" type="email" class="form-control" id="regEmail" aria-describedby="regEmailHelp" placeholder="Enter email" value="<?php echo $data['email'] ?>" required>
@@ -25,26 +62,29 @@
             <textarea class="form-control" name="bio" id="bio" rows="3" placeholder="About you"><?php echo $data['bio']; ?></textarea>
         </div>
         <div class="form-group">
-            <label for="updateAvatar">Email address</label>
-            <input name="avatar" type="file" class="form-control" id="updateAvatar" aria-describedby="updateAv" placeholder="Select file" type="image/*" required>
+            <label for="updateAvatar">Avatar</label>
+            <input name="avatar" type="text" class="form-control" id="updateAvatar" aria-describedby="updateAv" placeholder="Select file" type="image/*" value="<?php echo $data['avatar_url']; ?>">
         </div>
         <div class="form-group">
             <label for="regPassw">Password</label>
-            <input name="passw" type="password" class="form-control" id="regPassw" placeholder="Password" required>
+            <input name="passw" type="password" class="form-control" id="regPassw" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-primary btn-regUser">Update</button>
     </form>
     <hr>
 </div>
-<div class="container">
-<h3>Your posts</h3>
-<?php 
-    $getPosts = $pdo->prepare("SELECT * FROM posts WHERE authorID=:user ORDER BY postID DESC");
-    $getPosts->bindParam(':user', $_SESSION['userid']);
-    if(!$getPosts->execute()) echo "Something went wrong while loading your posts, please refresh page.";
-        $posts = $getPosts->fetchAll(PDO::FETCH_ASSOC);
-    foreach($posts as $post){
+<?php
+    endif;
 ?>
+<div class="container">
+    <h3>Accounts posts</h3>
+    <?php
+        $getPosts = $pdo->prepare("SELECT * FROM posts WHERE authorID=:user ORDER BY postID DESC");
+        $getPosts->bindParam(':user', $target);
+        if(!$getPosts->execute()) echo "Something went wrong while loading the accounts posts, please refresh page.";
+        $posts = $getPosts->fetchAll(PDO::FETCH_ASSOC);
+        foreach($posts as $post):
+    ?>
     <div class="card mt-4">
         <a href="${post['imageURL']}" class="card-header" onclick="return false;">
             <?php echo $post['title']; ?>
@@ -56,11 +96,15 @@
             </blockquote>
         </div>
     </div>
-    <a href="#" class="btn btn-sm btn-primary">Update</a>
-    <a href="app/posts/delete.php?post=<?php echo $post['postID']; ?>" class="btn btn-sm btn-danger" onclick="if(!confirm('Are you sure?')) return false;">Remove</a>
-<?php
-    }
-?>
+    <?php
+        if($_SESSION['userid'] == $post['authorID']):
+    ?>
+        <a href="#" class="btn btn-sm btn-primary">Update</a>
+        <a href="app/posts/delete.php?post=<?php echo $post['postID']; ?>" class="btn btn-sm btn-danger" onclick="if(!confirm('Are you sure?')) return false;">Remove</a>
+    <?php
+        endif;
+        endforeach;
+    ?>
 </div>
 
 <?php require 'views/footer.php'; ?>
