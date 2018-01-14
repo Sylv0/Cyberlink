@@ -7,9 +7,6 @@
             <li class="nav-item">
                 <a class="nav-link" href=".">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo $loggedIn ? "makepost.php" : "login.php"; ?>">Make Post</a>
-            </li>
         </ul>
         <?php if(!$loggedIn): ?>
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
