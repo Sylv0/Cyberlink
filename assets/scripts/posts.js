@@ -52,12 +52,12 @@ const createPost = (post) => {
         <div class="card-body row">
             <blockquote class="blockquote mb-0 col-10">
                 <p>${post['postText']}</p>
-                <footer class="blockquote-footer"><a href="${post['author']}">${post['author']}</a> <cite title="Source Title">${post['postTime']}</cite> (${post['updateTime']})</footer>
+                <footer class="blockquote-footer"><a href="profile.php?targetUser=${post['userID']}">${post['author']}</a> <cite title="Source Title">${post['postTime']}</cite> (${post['updateTime']})</footer>
             </blockquote>
             <blockquote class="col-2">
-                <a href="#" class="btn btn-sm btn-primary vote voteUp">&uArr;</a>
+                <a href="#" class="btn btn-sm btn-primary vote" data-postid="${post['postID']}" data-vote="1">&uArr;</a>
                  0 
-                <a href="#" class="btn btn-sm btn-primary vote voteDown">&dArr;</a>
+                <a href="#" class="btn btn-sm btn-primary vote" data-postid="${post['postID']}" data-vote="-1">&dArr;</a>
             </blockquote>
         </div>
     </div>
