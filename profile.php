@@ -1,7 +1,7 @@
 <style>
     .profile-img{
-        height: 150px;
-        width: auto;
+        max-height: 150px;
+        max-width: 250px;
     }
 </style>
 
@@ -34,7 +34,7 @@
     <div class="reviews">
     <div class="row blockquote">
         <div class="col-md-3 text-center">
-        <img class="rounded-circle profile-img" src="<?php echo $data['avatar_url']; ?>">
+        <img class="profile-img" src="<?php echo $data['avatar_url']; ?>">
 
         </div>
         <div class="col-md-9">
