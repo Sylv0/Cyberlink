@@ -10,7 +10,7 @@ if (!isset($_POST['title']) || !isset($_POST['text']) || !isset($_POST['author']
     die;
 }
 
-$statement = $pdo->prepare('INSERT INTO posts(authorID, title, postText, image_url, postTime, updateTime) VALUES (:authid, :title, :inText, :imageURL, :date, :date)');
+$statement = $pdo->prepare('INSERT INTO posts(authorID, title, postText, image_url, postTime, updateTime) VALUES (:authid, :title, :inText, :imageURL, datetime(), datetime())');
 
 $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
 $text = filter_var($_POST['text'], FILTER_SANITIZE_STRING);
@@ -20,8 +20,6 @@ $statement->bindParam(':authid', $_POST['author']);
 $statement->bindParam(':title', $title);
 $statement->bindParam(':inText', $text);
 $statement->bindParam(':imageURL', $imageURL);
-$date = Date('Y-m-d H:i:s');
-$statement->bindParam(':date', $date);
 
 if(!$statement->execute()){
     echo json_encode(['error' => true, 'errorInfo' => $pdo->errorInfo()]);
