@@ -1,3 +1,0 @@
-DROP TABLE users;
-CREATE TABLE users(id integer primary key, nickname text unique, email text unique, passw text, bio text, avatar_url text);
-INSERT INTO users(nickname, email, passw) VALUES ('t', 't@t.t', '$2y$10$BPpvHwNQe7AjCjXScUQiXeqvq9TCGT/ISPjZG68/ZRdOrFyWmrFBe');
