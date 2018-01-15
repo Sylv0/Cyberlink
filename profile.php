@@ -1,5 +1,5 @@
 <style>
-    .reviewer{
+    .profile-img{
         height: 150px;
         width: auto;
     }
@@ -32,9 +32,9 @@
 ?>
 <div class="container">
     <div class="reviews">
-    <div class="row blockquote review-item">
+    <div class="row blockquote">
         <div class="col-md-3 text-center">
-        <img class="rounded-circle reviewer" src="<?php echo $data['avatar_url']; ?>">
+        <img class="rounded-circle profile-img" src="<?php echo $data['avatar_url']; ?>">
 
         </div>
         <div class="col-md-9">
@@ -51,7 +51,7 @@
     if($_SESSION['userid'] == $data['id']):
 ?>
 <div class="container">
-    <form name="regUserForm" action="app/users/update.php" method="post">
+    <form name="regUserForm" enctype="multipart/form-data" action="app/users/update.php" method="post">
         <div class="form-group">
             <label for="regEmail">Email address</label>
             <input name="email" type="email" class="form-control" id="regEmail" aria-describedby="regEmailHelp" placeholder="Enter email" value="<?php echo $data['email'] ?>" required>
@@ -63,7 +63,7 @@
         </div>
         <div class="form-group">
             <label for="updateAvatar">Avatar</label>
-            <input name="avatar" type="text" class="form-control" id="updateAvatar" aria-describedby="updateAv" placeholder="Select file" type="image/*" value="<?php echo $data['avatar_url']; ?>">
+            <input name="avatar" type="file" class="form-control" id="updateAvatar" aria-describedby="updateAv" placeholder="Select file" accept="image/*" value="<?php echo $data['avatar_url']; ?>">
         </div>
         <div class="form-group">
             <label for="regPassw">Password</label>
