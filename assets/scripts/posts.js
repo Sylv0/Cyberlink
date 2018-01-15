@@ -10,7 +10,6 @@ window.onload = () => {
     });
 
     getPosts();
-    getVotes();
 }
 
 const submitPost = () => {
@@ -55,9 +54,9 @@ const createPost = (post) => {
                 <footer class="blockquote-footer"><a href="profile.php?targetUser=${post['userID']}">${post['author']}</a> <cite title="Source Title">${post['postTime']}</cite> (${post['updateTime']})</footer>
             </blockquote>
             <blockquote class="col-2">
-                <a href="#" class="btn btn-sm btn-primary vote" data-postid="${post['postID']}" data-vote="1">&uArr;</a>
-                 0 
-                <a href="#" class="btn btn-sm btn-primary vote" data-postid="${post['postID']}" data-vote="-1">&dArr;</a>
+                <a onclick="return false;" href="#" class="btn btn-sm btn-primary active vote" data-postid="${post['postID']}" data-vote="1">&uArr;</a>
+                <span class="voteScore" data-postid="${post['postID']}">0</span>
+                <a onclick="return false;" href="#" class="btn btn-sm btn-primary active vote" data-postid="${post['postID']}" data-vote="-1">&dArr;</a>
             </blockquote>
         </div>
     </div>
@@ -91,6 +90,7 @@ const getPosts = () => {
                 postDiv.insertBefore(createPost(post), postDiv.children[0]);
             });
         }
+        getVotes();
     })
     .catch(res => console.log(res));
 }
@@ -120,7 +120,6 @@ const getLatestPost = () => {
 const getVotes = (postID) => {
     let formData = new FormData();
     formData.append('getVotes', true);
-    formData.append('postID', postID);
     var request = new Request('app/posts/get.php', {
         method: 'POST',
         body: formData
@@ -131,7 +130,13 @@ const getVotes = (postID) => {
         return data.json();
     })
     .then(data => {
-        //console.log(data);
+        console.log(data);
+        data.forEach(vote => {
+            let scoretarget = document.querySelector(`span.voteScore[data-postid="${vote['postID']}"]`);
+            scoretarget.innerHTML = parseInt(scoretarget.innerHTML, 10)+parseInt(vote['vote'], 10);
+            let votebuttontarget = document.querySelector(`a.btn.vote[data-postid="${vote['postID']}"][data-vote="${vote['vote']}"]`);
+            votebuttontarget.classList.add('disabled');
+        });
     })
     .catch(res => console.log(res));
 }
