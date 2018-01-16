@@ -9,6 +9,13 @@ window.onload = () => {
 
     document.forms['regUserForm'].addEventListener('submit', e => {
         //event.preventDefault();
+        if(document.forms['regUserForm']['passw'].value != document.forms['regUserForm']['passw_repeat'].value){
+            document.forms['regUserForm']['passw_repeat'].classList.add('bg-warning');
+            setTimeout(() => {
+                document.forms['regUserForm']['passw_repeat'].classList.remove('bg-warning');                
+            }, 1000);
+            return false;
+        }
         let formData = new FormData();
         formData.append('username', regUserForm['username'].value);
         formData.append('email', regUserForm['email'].value);
