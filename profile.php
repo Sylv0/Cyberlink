@@ -46,10 +46,21 @@
     </div>
 </div>
 
+<div class="container">
 <?php
     if($_SESSION['userid'] == $data['id']):
+        if(isset($_GET['passchange']) && $_GET['passchange'] == 'true'):
 ?>
-<div class="container">
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> Password changed.
+    </div>
+<?php elseif (isset($_GET['passchange']) && $_GET['passchange'] == 'false'): ?>
+    <div class="alert alert-warning alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Warning!</strong> Indicates a warning that might need attention.
+    </div>
+<?php endif; ?>
     <form name="updateUserForm" enctype="multipart/form-data" action="app/users/update.php" method="post">
         <div class="form-group">
             <label for="regEmail">Email address</label>
