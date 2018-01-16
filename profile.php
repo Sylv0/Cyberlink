@@ -7,7 +7,7 @@
 
 <?php
     require 'views/header.php';
-    if(!isset($_SESSION['userid'])) redirect('.');
+    if(!isset($_SESSION['userid'])) redirect('./login.php');
 
     if(isset($_GET['targetUser'])) {
         $target = $_GET['targetUser'];
@@ -51,7 +51,7 @@
     if($_SESSION['userid'] == $data['id']):
 ?>
 <div class="container">
-    <form name="regUserForm" enctype="multipart/form-data" action="app/users/update.php" method="post">
+    <form name="updateUserForm" enctype="multipart/form-data" action="app/users/update.php" method="post">
         <div class="form-group">
             <label for="regEmail">Email address</label>
             <input name="email" type="email" class="form-control" id="regEmail" aria-describedby="regEmailHelp" placeholder="Enter email" value="<?php echo $data['email'] ?>" required>
@@ -63,7 +63,8 @@
         </div>
         <div class="form-group">
             <label for="updateAvatar">Avatar</label>
-            <input name="avatar" type="file" class="form-control" id="updateAvatar" aria-describedby="updateAv" placeholder="Select file" accept="image/*" value="<?php echo $data['avatar_url']; ?>">
+            <input name="avatar" type="file" class="form-control" id="updateAvatar" aria-describedby="updateAv" placeholder="Select file" accept="image/*">
+            URL: <input type="checkbox" name="urlcheck">
         </div>
         <div class="form-group">
             <label for="regPassw">Password</label>
@@ -85,13 +86,14 @@
         $posts = $getPosts->fetchAll(PDO::FETCH_ASSOC);
         foreach($posts as $post):
     ?>
-    <div class="card mt-4">
-        <a href="${post['imageURL']}" class="card-header" onclick="return false;">
+    <div class="card mt-4 post" data-postid="<?php echo $post['postID']; ?>">
+        <a href="${post['imageURL']}" class="card-header postTitle" onclick="return false;">
             <?php echo $post['title']; ?>
         </a>
+        <input type="text">
         <div class="card-body row">
             <blockquote class="blockquote mb-0 col-10">
-                <p><?php echo $post['postText']; ?></p>
+                <p class="postText"><?php echo $post['postText']; ?></p>
                 <footer class="blockquote-footer"> <cite title="Source Title"><?php echo $post['postTime']; ?></cite> (<?php echo $post['updateTime']; ?>)</footer>
             </blockquote>
         </div>
@@ -99,12 +101,13 @@
     <?php
         if($_SESSION['userid'] == $post['authorID']):
     ?>
-        <a href="#" class="btn btn-sm btn-primary">Update</a>
+        <!-- <a href="#" class="btn btn-sm btn-primary">Update</a> -->
+        Edit: <input type="checkbox" class="editPostCheck" data-postid="<?php echo $post['postID']; ?>">
         <a href="app/posts/delete.php?post=<?php echo $post['postID']; ?>" class="btn btn-sm btn-danger" onclick="if(!confirm('Are you sure?')) return false;">Remove</a>
     <?php
         endif;
         endforeach;
     ?>
 </div>
-
+<script src="assets/scripts/profile.js"></script>
 <?php require 'views/footer.php'; ?>
