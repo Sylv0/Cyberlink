@@ -14,5 +14,7 @@ $removePost->bindParam(':id', $_GET['post']);
 if(!$removePost->execute()){
     echo "Something went wrong<br><a href='../../profile.php'>Go back</a>";
 }
-
+$removeVotes = $pdo->prepare('DELETE FROM postVotes WHERE postID=:id');
+$removeVotes->bindParam(':id', $_GET['post']);
+$removeVotes->execute();
 redirect('../../profile.php');
