@@ -50,6 +50,10 @@ if(isset($_SESSION['userid'])) redirect('.');
                     <label for="regPassw">Password</label>
                     <input name="passw" type="password" class="form-control" placeholder="Password" required>
                 </div>
+                <div class="form-group">
+                    <label for="regPassw">Repeat Password</label>
+                    <input name="passw_repeat" type="password" class="form-control" placeholder="Password" required>
+                </div>
                 <button type="submit" class="btn btn-primary btn-regUser">Register</button>
             </form>
         </div>
