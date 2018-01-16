@@ -25,7 +25,8 @@ if(strlen($_POST['bio']) > 0 && $_POST['bio'] != $data['bio']){
 }
 if($_POST['urlcheck'] && strlen($_POST['avatar']) > 0){
     $updateAvatar = $pdo->prepare('UPDATE users SET avatar_url=:avatar WHERE id=:id');
-    $updateAvatar->bindParam(':avatar', $_POST['avatar']);
+    $url = filter_var($_POST['avatar'], FILTER_SANITIZE_URL);
+    $updateAvatar->bindParam(':avatar', $url);
     $updateAvatar->bindParam(':id', $id);
     $updateAvatar->execute();
 }
