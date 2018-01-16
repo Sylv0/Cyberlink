@@ -21,7 +21,6 @@
     if (!$statement->execute()) {
         echo $pdo->errorInfo();
         die;
-        //redirect('./login.php');
     }
 
     $data = $statement->fetch(PDO::FETCH_ASSOC);
@@ -34,7 +33,7 @@
     <div class="reviews">
     <div class="row blockquote">
         <div class="col-md-3 text-center">
-        <img class="profile-img" src="<?php echo $data['avatar_url']; ?>">
+        <img class="profile-img mt-3" src="<?php echo $data['avatar_url']; ?>">
 
         </div>
         <div class="col-md-9">
@@ -67,8 +66,16 @@
             URL: <input type="checkbox" name="urlcheck">
         </div>
         <div class="form-group">
-            <label for="regPassw">Password</label>
-            <input name="passw" type="password" class="form-control" id="regPassw" placeholder="Password">
+            <label for="regPasswOld">Old Password (NOT READY YET)</label>
+            <input name="passwOld" type="password" class="form-control" id="regPasswOld" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="regPasswNew">New Password</label>
+            <input name="passwNew" type="password" class="form-control" id="regPasswNew" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="regPasswRepeat">Repeat New Password</label>
+            <input name="passwRepeat" type="password" class="form-control" id="regPasswRepeat" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-primary btn-regUser">Update</button>
     </form>
@@ -87,21 +94,21 @@
         foreach($posts as $post):
     ?>
     <div class="card mt-4 post" data-postid="<?php echo $post['postID']; ?>">
-        <a href="${post['imageURL']}" class="card-header postTitle" onclick="return false;">
+        <a href="<?php echo $post['image_url']; ?>" target="_blank" class="card-header postTitle" onclick="if(this.getAttribute('href') == '') return false;">
             <?php echo $post['title']; ?>
         </a>
-        <input type="text">
+        <input type="text" class="editTitle d-none">
         <div class="card-body row">
             <blockquote class="blockquote mb-0 col-10">
                 <p class="postText"><?php echo $post['postText']; ?></p>
-                <footer class="blockquote-footer"> <cite title="Source Title"><?php echo $post['postTime']; ?></cite> (<?php echo $post['updateTime']; ?>)</footer>
+                <textarea name="" id="" cols="30" rows="10" class="editText d-none"></textarea>
+                <footer class="blockquote-footer"> <cite title="Source Title"><?php echo $post['postTime']; ?></cite> (<span class="updateTime"><?php echo $post['updateTime']; ?></span>)</footer>
             </blockquote>
         </div>
     </div>
     <?php
         if($_SESSION['userid'] == $post['authorID']):
     ?>
-        <!-- <a href="#" class="btn btn-sm btn-primary">Update</a> -->
         Edit: <input type="checkbox" class="editPostCheck" data-postid="<?php echo $post['postID']; ?>">
         <a href="app/posts/delete.php?post=<?php echo $post['postID']; ?>" class="btn btn-sm btn-danger" onclick="if(!confirm('Are you sure?')) return false;">Remove</a>
     <?php
