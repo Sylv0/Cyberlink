@@ -23,7 +23,13 @@ if(strlen($_POST['bio']) > 0 && $_POST['bio'] != $data['bio']){
     $updateBio->bindParam(':id', $id);
     $updateBio->execute();
 }
-if(isset($_FILES['avatar'])){
+if($_POST['urlcheck'] && strlen($_POST['avatar']) > 0){
+    $updateAvatar = $pdo->prepare('UPDATE users SET avatar_url=:avatar WHERE id=:id');
+    $updateAvatar->bindParam(':avatar', $_POST['avatar']);
+    $updateAvatar->bindParam(':id', $id);
+    $updateAvatar->execute();
+}
+if(!$_POST['urlcheck'] && isset($_FILES['avatar'])){
     $target_dir = "users/".$data['nickname']."/";
     $target_file = $target_dir . "profileImage.png";
 
