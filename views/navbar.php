@@ -5,7 +5,7 @@
     <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href=".">Home</a>
+                <a class="nav-link <?php if(basename($_SERVER['SCRIPT_NAME'] == 'index.php')){ echo 'active'; } ?>" href=".">Home</a>
             </li>
         </ul>
         <?php if(!$loggedIn): ?>
