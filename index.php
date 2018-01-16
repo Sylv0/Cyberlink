@@ -2,7 +2,6 @@
 declare(strict_types=1);
 require(__DIR__.'/views/header.php');
 ?>
-
 <main class="container-fluid">
   <?php if(isset($_SESSION['userid'])): ?>
     <form name="postForm" onsubmit="return false;" class="col-lg-10 col-md-12">
