@@ -23,14 +23,14 @@ if(strlen($_POST['bio']) > 0 && $_POST['bio'] != $data['bio']){
     $updateBio->bindParam(':id', $id);
     $updateBio->execute();
 }
-if($_POST['urlcheck'] && strlen($_POST['avatar']) > 0){
+if(isset($_POST['urlcheck']) && $_POST['urlcheck'] && strlen($_POST['avatar']) > 0){
     $updateAvatar = $pdo->prepare('UPDATE users SET avatar_url=:avatar WHERE id=:id');
     $url = filter_var($_POST['avatar'], FILTER_SANITIZE_URL);
     $updateAvatar->bindParam(':avatar', $url);
     $updateAvatar->bindParam(':id', $id);
     $updateAvatar->execute();
 }
-if(!$_POST['urlcheck'] && isset($_FILES['avatar'])){
+if(isset($_POST['urlcheck']) && !$_POST['urlcheck'] && isset($_FILES['avatar']) && !empty($_POST['avatar'])){
     $target_dir = "users/".$data['nickname']."/";
     $target_file = $target_dir . "profileImage.png";
 
@@ -46,4 +46,18 @@ if(!$_POST['urlcheck'] && isset($_FILES['avatar'])){
         echo "Sorry, there was an error uploading your file.";
     }
 }
+
+if(isset($_POST['passwNew']) && strlen($_POST['passwNew']) > 0 && $_POST['passwNew'] == $_POST['passwRepeat'] && password_verify($_POST['passwOld'], $data['passw'])){
+    $updateData = $pdo->prepare('UPDATE users SET passw=:pass WHERE id=:id');
+    $pass = password_hash($_POST['passwNew'], PASSWORD_DEFAULT);
+    $updateData->bindParam(':pass', $pass);
+    $updateData->bindParam(':id', $_SESSION['userid']);
+    if(!$updateData->execute()){
+        redirect('../../profile.php?passchange=false');
+        die;
+    }
+    redirect('../../profile.php?passchange=true');
+    die;
+}
+
 redirect('../../profile.php');
