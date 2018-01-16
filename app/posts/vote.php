@@ -5,7 +5,7 @@
     $checkVote = $pdo->prepare('SELECT * FROM postVotes WHERE userID=:user AND postID=:post');
     $checkVote->bindParam(':user', $_POST['userID']);
     $checkVote->bindParam(':post', $_POST['postID']);
-    if($checkVote->execute()){
+    if($checkVote->execute() && $checkVote->fetch()){
         echo json_encode(['voted'=>true]);
     }else{
         $saveVote = $pdo->prepare('INSERT INTO postVotes(postID, userID, vote) VALUES (:post, :user, :vote)');
