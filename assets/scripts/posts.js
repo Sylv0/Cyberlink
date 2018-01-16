@@ -84,7 +84,6 @@ const createPost = (post) => {
                 return data.json();
             })
             .then(data => {
-                console.log(data);
                 if(data['voteSaved']){
                     getVotes();
                 }
