@@ -1,10 +1,3 @@
-<style>
-    .profile-img{
-        max-height: 150px;
-        max-width: 250px;
-    }
-</style>
-
 <?php
     require 'views/header.php';
     if(!isset($_SESSION['userid'])) redirect('./login.php');
@@ -29,6 +22,13 @@
         die;
     }
 ?>
+<style>
+    .profile-img{
+        max-height: 150px;
+        max-width: 250px;
+    }
+</style>
+
 <div class="container">
     <div class="reviews">
     <div class="row blockquote">
@@ -105,9 +105,7 @@
         foreach($posts as $post):
     ?>
     <div class="card mt-4 post" data-postid="<?php echo $post['postID']; ?>">
-        <a href="<?php echo $post['image_url']; ?>" target="_blank" class="card-header postTitle" onclick="if(this.getAttribute('href') == '') return false;">
-            <?php echo $post['title']; ?>
-        </a>
+        <a href="<?php echo $post['image_url']; ?>" target="_blank" class="card-header postTitle" onclick="if(this.getAttribute('href') == '') return false;"><?php echo $post['title']; ?></a>
         <input type="text" class="editTitle d-none">
         <div class="card-body row">
             <blockquote class="blockquote mb-0 col-10">
