@@ -30,7 +30,7 @@ if(isset($_POST['urlcheck']) && $_POST['urlcheck'] && strlen($_POST['avatar']) >
     $updateAvatar->bindParam(':id', $id);
     $updateAvatar->execute();
 }
-if(isset($_POST['urlcheck']) && !$_POST['urlcheck'] && isset($_FILES['avatar']) && !empty($_POST['avatar'])){
+if(isset($_FILES['avatar']) && !empty($_FILES['avatar'])){
     $target_dir = "users/".$data['nickname']."/";
     $target_file = $target_dir . "profileImage.png";
 
@@ -59,5 +59,4 @@ if(isset($_POST['passwNew']) && strlen($_POST['passwNew']) > 0 && $_POST['passwN
     redirect('../../profile.php?passchange=true');
     die;
 }
-
 redirect('../../profile.php');
