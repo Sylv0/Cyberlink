@@ -21,12 +21,6 @@ if(isset($_SESSION['userid'])) redirect('.');
                     <label for="loginPassw">Password</label>
                     <input name="passw" type="password" class="form-control" placeholder="Password" required>
                 </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input">
-                    Remember ME!
-                </label>
-                </div>
                 <input name="sessid" type="hidden" value="<?php echo session_id(); ?>">
                 <button type="submit" class="btn btn-primary btn-loginUser">Login</button>
             </form>
