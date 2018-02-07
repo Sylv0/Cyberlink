@@ -8,15 +8,10 @@
         $target = $_SESSION['userid'];
     }
 
-    $statement = $pdo->prepare("SELECT id, nickname, email, bio, avatar_url, regDate from users WHERE id=:id");
-    $statement->bindParam(":id", $target, PDO::PARAM_INT);
-
-    if (!$statement->execute()) {
-        echo $pdo->errorInfo();
-        die;
-    }
-
-    $data = $statement->fetch(PDO::FETCH_ASSOC);
+    // $statement = $pdo->prepare("SELECT id, nickname, email, bio, avatar_url, regDate from users WHERE id=:id");
+    // $statement->bindParam(":id", $target, PDO::PARAM_INT);
+    // $data = $statement->fetch(PDO::FETCH_ASSOC);
+    $data = SelectFromBD($pdo, "SELECT id, nickname, email, bio, avatar_url, regDate from users WHERE id=?", [$target], false);
     if($data === false){
         echo "No user found with that idea.";
         die;
@@ -98,10 +93,11 @@
 <div class="container">
     <h3>Accounts posts</h3>
     <?php
-        $getPosts = $pdo->prepare("SELECT * FROM posts WHERE authorID=:user ORDER BY postID DESC");
-        $getPosts->bindParam(':user', $target);
-        if(!$getPosts->execute()) echo "Something went wrong while loading the accounts posts, please refresh page.";
-        $posts = $getPosts->fetchAll(PDO::FETCH_ASSOC);
+        // $getPosts = $pdo->prepare("SELECT * FROM posts WHERE authorID=:user ORDER BY postID DESC");
+        // $getPosts->bindParam(':user', $target);
+        // if(!$getPosts->execute()) echo "Something went wrong while loading the accounts posts, please refresh page.";
+        // $posts = $getPosts->fetchAll(PDO::FETCH_ASSOC);
+        $posts = SelectFromBD($pdo, "SELECT * FROM posts WHERE authorID=? ORDER BY postID DESC", [$target], true);
         foreach($posts as $post):
     ?>
     <div class="card mt-4 post" data-postid="<?php echo $post['postID']; ?>">
