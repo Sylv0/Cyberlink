@@ -15,7 +15,7 @@ window.onload = () => {
 const submitPost = () => {
     let formData = new FormData();
     formData.append('title', postForm['postTitle'].value);
-    formData.append('link', postForm['postLink'].value);
+    formData.append('link', postForm['website'].value);
     formData.append('text', postForm['postText'].value);
     formData.append('author', postForm['postAuthor'].value);
     var request = new Request('app/posts/submit.php', {
