@@ -11,7 +11,7 @@ require(__DIR__.'/views/header.php');
       </fieldset>
       <fieldset class="form-group">
         <label for="formGroupLink">Link</label>
-        <input type="text" class="form-control" id="formGroupLink" placeholder="Link to something awesome" name="postLink">
+        <input type="text" class="form-control" id="formGroupLink" placeholder="Link to something awesome" name="website">
       </fieldset>
       <fieldset class="form-group">
         <label for="formGroupExampleInput2">Text</label>
