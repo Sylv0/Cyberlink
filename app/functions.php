@@ -25,7 +25,7 @@ if (!function_exists('redirect')) {
  * @param bool $fetchAll
  * @return void
  */
-function SelectFromBD($pdo, string $sql, array $params, $fetchAll) : array{
+function SelectFromBD(PDO $pdo, string $sql, array $params, bool $fetchAll){
     $statement = $pdo->prepare($sql);
     $statement->execute($params);
     if($fetchAll){
