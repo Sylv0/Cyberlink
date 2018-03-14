@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require(__DIR__.'/../app/autoload.php');
+require __DIR__.'/../app/autoload.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,4 +24,4 @@ require(__DIR__.'/../app/autoload.php');
     <?php if (isset($_SESSION['userid'])): ?>
     <div data-userid="<?php echo $_SESSION['userid'] ?>"></div>
     <?php endif; ?>
-    <?php require(__DIR__.'/navbar.php'); ?>
+    <?php require __DIR__.'/navbar.php'; ?>

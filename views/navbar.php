@@ -22,7 +22,7 @@
             $getUser = $pdo->prepare('SELECT nickname FROM users WHERE id=:ID');
             $getUser->bindParam(':ID', $_SESSION['userid']);
             if (!$getUser->execute()) {
-                $user = "NoNickname";
+                $user = 'NoNickname';
             } else {
                 $user = $getUser->fetch()['nickname'];
             }

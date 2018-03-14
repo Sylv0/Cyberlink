@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require(__DIR__.'/views/header.php');
+require __DIR__.'/views/header.php';
 if (isset($_SESSION['userid'])) {
     redirect('.');
 }
@@ -56,4 +56,4 @@ if (isset($_SESSION['userid'])) {
     </div>
 </main>
 <script src="assets/scripts/login.js"></script>
-<?php require(__DIR__.'/views/footer.php'); ?>
+<?php require __DIR__.'/views/footer.php'; ?>

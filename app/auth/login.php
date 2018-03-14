@@ -29,7 +29,7 @@
 
     //echo json_encode(['email'=>$_POST['email'], 'passw'=>$_POST['passw']]);
 
-    $statement = $pdo->prepare("SELECT id, email, passw FROM users WHERE email = :email");
+    $statement = $pdo->prepare('SELECT id, email, passw FROM users WHERE email = :email');
     $statement->bindParam(':email', $_POST['email']);
 
     if (!$statement->execute()) {
@@ -44,10 +44,10 @@
     if (isset($data['passw'])) {
         if (password_verify($_POST['passw'], $data['passw'])) {
             $_SESSION['userid'] = $data['id'];
-            echo json_encode("Logged in I guess " . $_SESSION['userid']);
+            echo json_encode('Logged in I guess '.$_SESSION['userid']);
             die;
         }
-        echo json_encode(['error'=>true, 'errorInfo'=>"Password was not set in database"]);
+        echo json_encode(['error'=>true, 'errorInfo'=>'Password was not set in database']);
         die;
     } else {
         echo json_encode(['error' => true, 'errorInfo'=>'User not found']);

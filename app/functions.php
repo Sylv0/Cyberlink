@@ -27,11 +27,12 @@ if (!function_exists('redirect')) {
 }
 
 /**
- * Give an SQL-statement with paramaters and get the result
+ * Give an SQL-statement with paramaters and get the result.
  *
  * @param string $sql
- * @param array $params
- * @param bool $fetchAll
+ * @param array  $params
+ * @param bool   $fetchAll
+ *
  * @return void
  */
 function SelectFromBD(PDO $pdo, string $sql, array $params, bool $fetchAll)
