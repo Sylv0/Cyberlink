@@ -22,7 +22,7 @@
         //     die;
         // }
         // echo json_encode($getPosts->fetchAll(PDO::FETCH_ASSOC));
-        echo json_encode(SelectFromBD($pdo, "SELECT p.postID, p.title, p.postText, p.postTime, p.updateTime, p.image_url, u.nickname AS author, u.id AS userID FROM posts AS p, users AS u WHERE p.authorID=u.id", [], true));
+        echo json_encode(SelectFromBD($pdo, 'SELECT p.postID, p.title, p.postText, p.postTime, p.updateTime, p.image_url, u.nickname AS author, u.id AS userID FROM posts AS p, users AS u WHERE p.authorID=u.id', [], true));
     } elseif (isset($_POST['getLatest']) && $_POST['getLatest']) {
         // $getPosts = $pdo->prepare('SELECT p.postID, p.title, p.postText, p.postTime, p.updateTime, p.image_url, u.nickname AS author, u.id AS userID FROM posts AS p, users AS u WHERE p.authorID=u.id ORDER BY p.postID DESC LIMIT 1');
         // if(!$getPosts->execute()){
@@ -30,7 +30,7 @@
         //     die;
         // }
         // echo json_encode($getPosts->fetch(PDO::FETCH_ASSOC));
-        echo json_encode(SelectFromBD($pdo, "SELECT p.postID, p.title, p.postText, p.postTime, p.updateTime, p.image_url, u.nickname AS author, u.id AS userID FROM posts AS p, users AS u WHERE p.authorID=u.id ORDER BY p.postID DESC LIMIT 1", [], false));
+        echo json_encode(SelectFromBD($pdo, 'SELECT p.postID, p.title, p.postText, p.postTime, p.updateTime, p.image_url, u.nickname AS author, u.id AS userID FROM posts AS p, users AS u WHERE p.authorID=u.id ORDER BY p.postID DESC LIMIT 1', [], false));
     } elseif (isset($_POST['getVotes']) && $_POST['getVotes']) {
         // if(isset($_POST['id'])){
         //     $getVotes = $pdo->prepare('SELECT * FROM postVotes WHERE :id');
@@ -41,8 +41,8 @@
         // $getVotes->execute();
         // echo json_encode($getVotes->fetchAll(PDO::FETCH_ASSOC));
         if (isset($_POST['id'])) {
-            echo json_encode(SelectFromBD($pdo, "SELECT * FROM postVotes WHERE postID=?", [$_POST['id']], true));
+            echo json_encode(SelectFromBD($pdo, 'SELECT * FROM postVotes WHERE postID=?', [$_POST['id']], true));
         } else {
-            echo json_encode(SelectFromBD($pdo, "SELECT * FROM postVotes", [], true));
+            echo json_encode(SelectFromBD($pdo, 'SELECT * FROM postVotes', [], true));
         }
     }

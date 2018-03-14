@@ -40,21 +40,21 @@ if (isset($_POST['urlcheck']) && $_POST['urlcheck'] && strlen($_POST['avatar']) 
     $updateAvatar->execute();
 }
 if (isset($_FILES['avatar']) && !empty($_FILES['avatar'])) {
-    $target_dir = "users/".$data['nickname']."/";
-    $target_file = $target_dir . "profileImage.png";
+    $target_dir = 'users/'.$data['nickname'].'/';
+    $target_file = $target_dir.'profileImage.png';
 
-    if (!mkdir("../../".$target_dir, 0777, true)) {
-        echo "Folder already exists";
+    if (!mkdir('../../'.$target_dir, 0777, true)) {
+        echo 'Folder already exists';
     }
 
-    if (move_uploaded_file($_FILES["avatar"]["tmp_name"], "../../".$target_file)) {
+    if (move_uploaded_file($_FILES['avatar']['tmp_name'], '../../'.$target_file)) {
         $updateAvatar = $pdo->prepare('UPDATE users SET avatar_url=:avatar WHERE id=:id');
         $updateAvatar->bindParam(':avatar', $target_file);
         $updateAvatar->bindParam(':id', $id);
         $updateAvatar->execute();
-        echo "The file ". basename($_FILES["avatar"]["name"]). " has been uploaded.";
+        echo 'The file '.basename($_FILES['avatar']['name']).' has been uploaded.';
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        echo 'Sorry, there was an error uploading your file.';
     }
 }
 
