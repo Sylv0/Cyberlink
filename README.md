@@ -1,5 +1,6 @@
 # Cyberlink
 PHP Project Reddit Clone
+<br>
 [![StyleCI](https://styleci.io/repos/113289867/shield?branch=master)](https://styleci.io/repos/113289867)
 
 # Documentation
