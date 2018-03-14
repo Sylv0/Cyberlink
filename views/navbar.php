@@ -5,10 +5,12 @@
     <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link <?php if(basename($_SERVER['SCRIPT_NAME'] == 'index.php')){ echo 'active'; } ?>" href=".">Home</a>
+                <a class="nav-link <?php if (basename($_SERVER['SCRIPT_NAME'] == 'index.php')) {
+    echo 'active';
+} ?>" href=".">Home</a>
             </li>
         </ul>
-        <?php if(!$loggedIn): ?>
+        <?php if (!$loggedIn): ?>
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
             <li class="nav-item">
                 <a class="nav-link text-primary" href="login.php">Login</a>
@@ -16,12 +18,12 @@
         </ul>
         <?php endif; ?>
         <?php
-            if($loggedIn):
+            if ($loggedIn):
             $getUser = $pdo->prepare('SELECT nickname FROM users WHERE id=:ID');
             $getUser->bindParam(':ID', $_SESSION['userid']);
-            if(!$getUser->execute()){
+            if (!$getUser->execute()) {
                 $user = "NoNickname";
-            }else{
+            } else {
                 $user = $getUser->fetch()['nickname'];
             }
         ?>

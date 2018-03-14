@@ -4,7 +4,7 @@ require(__DIR__.'/views/header.php');
 print_r(SelectFromBD($pdo, "DELETE FROM posts WHERE postID=33", [], false));
 ?>
 <main class="container-fluid">
-  <?php if(isset($_SESSION['userid'])): ?>
+  <?php if (isset($_SESSION['userid'])): ?>
     <form name="postForm" onsubmit="return false;" class="col-lg-10 col-md-12">
       <fieldset class="form-group">
         <label for="formGroupTitle">Title</label>

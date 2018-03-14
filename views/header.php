@@ -21,7 +21,7 @@ require(__DIR__.'/../app/autoload.php');
     </style>
   </head>
   <body>
-    <?php if(isset($_SESSION['userid'])): ?>
+    <?php if (isset($_SESSION['userid'])): ?>
     <div data-userid="<?php echo $_SESSION['userid'] ?>"></div>
     <?php endif; ?>
     <?php require(__DIR__.'/navbar.php'); ?>

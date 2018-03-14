@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Yrgo.
+ *
+ * (c) Yrgo, högre yrkesutbildning.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 if (!function_exists('redirect')) {
@@ -25,12 +34,13 @@ if (!function_exists('redirect')) {
  * @param bool $fetchAll
  * @return void
  */
-function SelectFromBD(PDO $pdo, string $sql, array $params, bool $fetchAll){
+function SelectFromBD(PDO $pdo, string $sql, array $params, bool $fetchAll)
+{
     $statement = $pdo->prepare($sql);
     $statement->execute($params);
-    if($fetchAll){
+    if ($fetchAll) {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }else{
+    } else {
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }

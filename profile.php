@@ -1,8 +1,10 @@
 <?php
     require 'views/header.php';
-    if(!isset($_SESSION['userid'])) redirect('./login.php');
+    if (!isset($_SESSION['userid'])) {
+        redirect('./login.php');
+    }
 
-    if(isset($_GET['targetUser'])) {
+    if (isset($_GET['targetUser'])) {
         $target = $_GET['targetUser'];
     } else {
         $target = $_SESSION['userid'];
@@ -12,7 +14,7 @@
     // $statement->bindParam(":id", $target, PDO::PARAM_INT);
     // $data = $statement->fetch(PDO::FETCH_ASSOC);
     $data = SelectFromBD($pdo, "SELECT id, nickname, email, bio, avatar_url, regDate from users WHERE id=?", [$target], false);
-    if($data === false){
+    if ($data === false) {
         echo "No user found with that idea.";
         die;
     }
@@ -33,7 +35,11 @@
         </div>
         <div class="col-md-9">
         <h4><?php echo $data['nickname'] ?></h4>
-        <p class="review-text"><?php if(strlen($data['bio']) == 0){ echo "No bio."; } else { echo $data['bio']; } ?></p>
+        <p class="review-text"><?php if (strlen($data['bio']) == 0) {
+    echo "No bio.";
+} else {
+    echo $data['bio'];
+} ?></p>
         <small class="review-date"><?php echo $data['email']; ?></small>
         <small class="review-date"><br>Member since: <?php echo $data['regDate']; ?></small>
         </div>
@@ -43,8 +49,8 @@
 
 <div class="container">
 <?php
-    if($_SESSION['userid'] == $data['id']):
-        if(isset($_GET['passchange']) && $_GET['passchange'] == 'true'):
+    if ($_SESSION['userid'] == $data['id']):
+        if (isset($_GET['passchange']) && $_GET['passchange'] == 'true'):
 ?>
     <div class="alert alert-success alert-dismissable">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -98,7 +104,7 @@
         // if(!$getPosts->execute()) echo "Something went wrong while loading the accounts posts, please refresh page.";
         // $posts = $getPosts->fetchAll(PDO::FETCH_ASSOC);
         $posts = SelectFromBD($pdo, "SELECT * FROM posts WHERE authorID=? ORDER BY postID DESC", [$target], true);
-        foreach($posts as $post):
+        foreach ($posts as $post):
     ?>
     <div class="card mt-4 post" data-postid="<?php echo $post['postID']; ?>">
         <a href="<?php echo $post['image_url']; ?>" target="_blank" class="card-header postTitle" onclick="if(this.getAttribute('href') == '') return false;"><?php echo $post['title']; ?></a>
@@ -112,7 +118,7 @@
         </div>
     </div>
     <?php
-        if($_SESSION['userid'] == $post['authorID']):
+        if ($_SESSION['userid'] == $post['authorID']):
     ?>
         Edit: <input type="checkbox" class="editPostCheck" data-postid="<?php echo $post['postID']; ?>">
         <a href="app/posts/delete.php?post=<?php echo $post['postID']; ?>" class="btn btn-sm btn-danger" onclick="if(!confirm('Are you sure?')) return false;">Remove</a>
