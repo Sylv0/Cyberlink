@@ -17,6 +17,7 @@ $config = require __DIR__.'/config.php';
 
 // Setup the database connection.
 $pdo = new PDO($config['database_path']);
+$pdo->query("PRAGMA foreign_keys=ON");
 
 // Include the helper functions.
 require __DIR__.'/functions.php';

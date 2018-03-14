@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require(__DIR__.'/views/header.php');
+print_r(SelectFromBD($pdo, "DELETE FROM posts WHERE postID=33", [], false));
 ?>
 <main class="container-fluid">
   <?php if(isset($_SESSION['userid'])): ?>
